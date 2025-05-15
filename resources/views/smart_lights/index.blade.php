@@ -380,6 +380,9 @@
                 <a href="{{ route('customers.index') }}" class="nav-link">
                     <i class="fas fa-users"></i> Customers
                 </a>
+                <a href="{{ route('purchases.index') }}" class="nav-link">
+                    <i class="fas fa-shopping-cart"></i> Purchases
+                </a>
             </div>
         </nav>
     </div>

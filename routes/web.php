@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SmartLightController;
+use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Route;
 
 // Redirect the root to the smart lights dashboard
@@ -29,6 +30,9 @@ Route::middleware('auth')->group(function () {
     
     // Customer routes (protected by authentication)
     Route::resource('customers', CustomerController::class);
+
+    // Purchase Routes
+    Route::resource('purchases', PurchaseController::class);
 });
 
 // Authentication routes

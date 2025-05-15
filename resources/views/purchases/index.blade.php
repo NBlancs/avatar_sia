@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Management</title>
+    <title>Purchase Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -87,15 +87,15 @@
             margin-right: 0.5rem;
         }
 
-        /* Customer Table Styles */
-        .customers-table {
+        /* Purchase Table Styles */
+        .purchases-table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0 0.5rem;
             color: var(--text-color);
         }
 
-        .customers-table th {
+        .purchases-table th {
             padding: 1rem;
             text-align: left;
             font-weight: 500;
@@ -104,22 +104,22 @@
             text-transform: uppercase;
         }
 
-        .customers-table td {
+        .purchases-table td {
             padding: 1rem;
             vertical-align: middle;
             background-color: rgba(255, 255, 255, 0.05);
         }
 
-        .customers-table tr:hover td {
+        .purchases-table tr:hover td {
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .customers-table tr td:first-child {
+        .purchases-table tr td:first-child {
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
         }
 
-        .customers-table tr td:last-child {
+        .purchases-table tr td:last-child {
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
         }
@@ -198,10 +198,10 @@
                 <a href="{{ route('smart-lights.index') }}" class="nav-link">
                     <i class="fas fa-lightbulb"></i> Smart Lights
                 </a>
-                <a href="{{ route('customers.index') }}" class="nav-link active">
+                <a href="{{ route('customers.index') }}" class="nav-link">
                     <i class="fas fa-users"></i> Customers
                 </a>
-                <a href="{{ route('purchases.index') }}" class="nav-link">
+                <a href="{{ route('purchases.index') }}" class="nav-link active">
                     <i class="fas fa-shopping-cart"></i> Purchases
                 </a>
             </div>
@@ -210,9 +210,9 @@
 
     <div class="dashboard-container">
         <div class="dashboard-header">
-            <h2>Customer Management</h2>
-            <a href="{{ route('customers.create') }}" class="btn-action btn-add">
-                <i class="fas fa-plus"></i> Add New Customer
+            <h2>Purchase Management</h2>
+            <a href="{{ route('purchases.create') }}" class="btn-action btn-add">
+                <i class="fas fa-plus"></i> Add New Purchase
             </a>
         </div>
 
@@ -223,36 +223,36 @@
             </div>
         @endif
 
-        <table class="customers-table">
+        <table class="purchases-table">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>NAME</th>
-                    <th>ADDRESS</th>
-                    <th>GENDER</th>
-                    <th>DATE OF BIRTH</th>
+                    <th>LIGHT</th>
+                    <th>CUSTOMER</th>
+                    <th>QUANTITY</th>
+                    <th>TOTAL PRICE</th>
                     <th>ACTIONS</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($customers as $customer)
+                @foreach ($purchases as $purchase)
                 <tr>
-                    <td>{{ $customer->id }}</td>
-                    <td>{{ $customer->name }}</td>
-                    <td>{{ $customer->address }}</td>
-                    <td>{{ $customer->gender }}</td>
-                    <td>{{ $customer->dob }}</td>
+                    <td>{{ $purchase->id }}</td>
+                    <td>{{ $purchase->light->name }}</td>
+                    <td>{{ $purchase->customer->name }}</td>
+                    <td>{{ $purchase->quantity }}</td>
+                    <td>₱{{ number_format($purchase->quantity * 100, 2) }}</td>
                     <td>
-                        <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" style="display: inline;">
-                            <a class="action-btn view" href="{{ route('customers.show', $customer->id) }}">
+                        <form action="{{ route('purchases.destroy', $purchase->id) }}" method="POST" style="display: inline;">
+                            <a class="action-btn view" href="{{ route('purchases.show', $purchase->id) }}">
                                 <i class="fas fa-eye"></i> View
                             </a>
-                            <a class="action-btn edit" href="{{ route('customers.edit', $customer->id) }}">
+                            <a class="action-btn edit" href="{{ route('purchases.edit', $purchase->id) }}">
                                 <i class="fas fa-pen"></i> Edit
                             </a>
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="action-btn delete" onclick="return confirm('Are you sure you want to delete this customer?')">
+                            <button type="submit" class="action-btn delete" onclick="return confirm('Are you sure you want to delete this purchase?')">
                                 <i class="fas fa-trash"></i> Delete
                             </button>
                         </form>
@@ -263,7 +263,7 @@
         </table>
         
         <div class="pagination-container">
-            {{ $customers->links() }}
+            {{ $purchases->links() }}
         </div>
     </div>
     
