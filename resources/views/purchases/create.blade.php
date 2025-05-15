@@ -150,6 +150,12 @@
                 <a href="{{ route('purchases.index') }}" class="nav-link active">
                     <i class="fas fa-shopping-cart"></i> Purchases
                 </a>
+                <a href="javascript:void(0)" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
         </nav>
     </div>
