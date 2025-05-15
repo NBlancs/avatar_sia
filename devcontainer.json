@@ -1,0 +1,18 @@
+{
+    "name": "Laravel",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "laravel.test",
+    "workspaceFolder": "/var/www/html",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "bmewburn.vscode-intelephense-client",
+                "MehediDracula.php-namespace-resolver",
+                "onecentlin.laravel-blade"
+            ]
+        }
+    },
+    "forwardPorts": [80, 3306, 5173],
+    "postCreateCommand": "composer install && npm install && php artisan key:generate && npm run build",
+    "remoteUser": "sail"
+}
