@@ -335,9 +335,55 @@
             font-size: 0.8rem;
             opacity: 0.7;
         }
+
+        /* Navigation Bar Styles */
+        .main-navbar {
+            background-color: var(--card-bg);
+            padding: 0.8rem 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link i {
+            margin-right: 0.5rem;
+        }
     </style>
 </head>
 <body>
+    <!-- Main Navigation -->
+    <div class="container mt-4">
+        <nav class="main-navbar">
+            <div class="nav-links">
+                <a href="{{ route('smart-lights.index') }}" class="nav-link active">
+                    <i class="fas fa-lightbulb"></i> Smart Lights
+                </a>
+                <a href="{{ route('customers.index') }}" class="nav-link">
+                    <i class="fas fa-users"></i> Customers
+                </a>
+            </div>
+        </nav>
+    </div>
+
     <div class="dashboard-container">
         <div class="dashboard-header">
             <h2>Smart Light Dashboard</h2>
